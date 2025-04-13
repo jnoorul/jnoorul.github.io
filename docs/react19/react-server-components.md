@@ -4,124 +4,47 @@ sidebar_position: 9
 
 # React Server Components
 
-## 🧠 What Are Server Components?
+Introduced in React 18 as experimental feature and stabilised in React 19. 
 
-React Server Components (RSC) are a new type of React component that runs **only on the server**. They allow you to build dynamic, data-rich apps while sending **less JavaScript** to the browser, resulting in better performance and scalability.
+## Client Side Rendering Vs Server Side Rendering
 
-Unlike traditional client-side components, Server Components are rendered on the server and streamed to the browser. The browser never sees or downloads the component’s source code.
+![alt text](csr-ssr.png)
 
----
+## How SSR Works?
+
+![alt text](ssr-hydration.png)
+
+## What Are Server Components?
+
+Server Components—that run ahead of time and are excluded from your JavaScript bundle. Server Components can run during the build, letting you read from the filesystem or fetch static content. They can also run on the server, letting you access your data layer without having to build an API. You can pass data by props from Server Components to the interactive Client Components in the browser.
+
+![alt text](csr-ssr-split.png)
 
 ## 🚀 Key Characteristics
 
-- Run **only on the server** – never executed in the browser
-- Can access **databases**, **file systems**, **secrets**, etc.
-- Use **async/await** directly during rendering
-- Can be **composed with Client Components**
-- Are **not bundled** into client-side JavaScript
-- Support **streaming** and **progressive hydration**
+- **Server-Side Rendering**: Components are rendered on the server, reducing the amount of JavaScript sent to the client
+- **Zero-Bundle-Size**: Server Components are not included in the client-side JavaScript bundle, leading to smaller bundle sizes
+- **Data Fetching**: They can fetch data directly from the server or filesystem without exposing APIs to the client
+- **Interoperability**: Server Components can pass data and JSX to Client Components, enabling seamless integration
+- **SEO-friendly** – Rendered HTML content is visible to search engines.
 
----
 
-## 💡 Benefits of Server Components
+## Server vs Client Components
 
-1. **Smaller client bundles** – Reduce the amount of JavaScript sent to the browser.
-2. **Secure data access** – Query databases, read files, and handle secrets safely.
-3. **Faster initial load** – Less JS means faster time to interactivity.
-4. **Simplified data fetching** – Fetch during render, no useEffect/useState needed.
-5. **Improved performance** – Ideal for large-scale apps and data-heavy UIs.
-6. **SEO-friendly** – Rendered HTML content is visible to search engines.
+![alt text](csr-ssr-comparision.png)
 
----
 
-## 📚 Server vs Client Components
+## SSR Setup
 
-| Feature                            | Client Component        | Server Component                |
-| ---------------------------------- | ----------------------- | ------------------------------- |
-| Runs in browser                    | ✅ Yes                  | ❌ No                           |
-| Included in JS bundle              | ✅ Yes                  | ❌ No                           |
-| Can use useState/useEffect         | ✅ Yes                  | ❌ No                           |
-| Can access backend logic (DB, API) | ❌ No                   | ✅ Yes                          |
-| Ideal for                          | Interactivity, UI logic | Data rendering, secure fetching |
+- **Without a Server**: Server Components can run at build time to fetch static content, eliminating the need for a web server.​
+- **With a Server**: They can also run on a web server during a request, allowing access to dynamic data sources.
 
----
 
-## 🔄 How Server Components Work (Simplified Flow)
-
-React Server Component Flow:
-
-- A Server Component:
-  - Fetches data securely (e.g., DB, APIs)
-  - Renders HTML on the server
-  - Streams that HTML to the client
-- A Client Component:
-  - Hydrates where interactivity is required
-
-This allows React to render a full page with data on the server, but hydrate only parts that require browser interaction.
-
----
-
-## ⚙️ When to Use Server Components
-
-**Use RSC when:**
-
-- You need to access secure backend resources (DB/API)
-- You want to reduce your JavaScript bundle size
-- Your UI is non-interactive (e.g., article content, product lists)
-- You’re building high-performance or SEO-sensitive pages
-
-**Avoid RSC when:**
-
-- You need interactivity (click handlers, forms, modals)
-- You rely on browser-only APIs (window, document)
-- You use hooks like `useState`, `useEffect`, `useRef`, etc.
-
----
-
-## 🔀 Mixing Server and Client Components
-
-React lets you mix both types:
-
-Example structure:
-
-```
-<App>
-  ├── <ProductList />    ← Server Component
-  └── <CartButton />     ← Client Component
-</App>
-```
-
-- Use **Server Components** for rendering read-only, backend-fetched UI.
-- Use **Client Components** for anything interactive or stateful.
-- Client components are marked explicitly using `"use client"` at the top of the file.
-
----
-
-## 🧠 Mental Model Shift
-
-Think of Server Components as **React-powered templates** that:
-
-- Run only on the server
-- Can use `async/await` directly in render
-- Never get shipped to the browser
-- Reduce load times by keeping JavaScript minimal
-
-Then, interactivity is layered using lightweight Client Components where necessary.
-
----
-
-## 🧾 Summary
+## Summary
 
 - Server Components simplify data fetching and reduce client-side load.
 - They allow secure, efficient rendering with zero runtime JS for non-interactive parts.
 - Best used for read-only, performance-critical, or SEO-sensitive UI.
 - Combine them with Client Components to balance performance and interactivity.
 
----
 
-## 🔗 Further Reading
-
-- GitHub Discussion: https://github.com/reactwg/server-components/discussions/5
-- Official React Docs: https://react.dev/learn/server-components
-
----
