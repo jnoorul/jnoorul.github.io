@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 🚀 React 19: Key Features & Improvements
+# 🚀 React 19: Features and Improvements
 
 ## 🔧 New APIs & Hooks
 
@@ -27,10 +27,10 @@ sidebar_position: 1
 
 ## 🛠️ Improvements
 
-- **Refs as Props*: Allows passing `ref` directly as a prop to componens.
-- **Context as a Component*: Enables using `<Context>` directly as a provider componet.
-- **Ref Cleanup Functions*: Introduces cleanup mechanisms for refs to manage resources effectivey.
-- **Initial Value in `useDeferredValue`*: Supports setting an initial value for deferred computatios.
+- **Refs as Props**: Allows passing `ref` directly as a prop to componens.
+- **Context as a Component**: Enables using `<Context>` directly as a provider componet.
+- **Ref Cleanup Functions**: Introduces cleanup mechanisms for refs to manage resources effectivey.
+- **Initial Value in `useDeferredValue`**: Supports setting an initial value for deferred computatios.
 
 ## 📄 Other Enhancements
 
