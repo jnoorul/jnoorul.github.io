@@ -4,96 +4,64 @@ sidebar_position: 8
 
 # React Compiler
 
-## 🚀 What Is It?
+## What Is It?
 
-The **React Compiler** (codename: **React Forget**) is a **new ahead-of-time (AOT) compiler** introduced in React 19. It analyzes your code and **automatically optimizes** component rendering by skipping unnecessary re-renders — **without requiring manual use of `useMemo`, `useCallback`, or `memo`**.
+React Compiler is a build-time optimization tool introduced in React 19. It automatically applies memoization to your components and hooks, reducing unnecessary re-renders and enhancing performance—without requiring manual use of useMemo, useCallback, or React.memo.
 
-Think of it as “reactivity with no ceremony.”
+## Why do we need it?
 
----
+**To prevent unneccessary rerenders**
 
-## 🎯 Goals
+![alt text](react-rendering-tree.png)
 
-- **Zero-cost reactivity**: Eliminate manual memoization boilerplate.
-- **Performance by default**: Scale well across deeply nested trees and high-frequency updates.
-- **Ergonomic**: Preserve idiomatic, declarative React code.
-- **Predictable**: Be sound and conservative — never skip renders unless it’s clearly safe.
+## Key Features
 
----
+- **Automatic Memoization**: Analyzes your code to determine where memoization can be applied, optimizing performance.
 
-## ⚙️ How It Works
+- **Build-Time Only**: Operates during the build process, ensuring no runtime overhead.
 
-- Performs **static analysis** on components to understand data flow and side effects.
-- Builds a **reactivity graph** of variables and functions.
-- Automatically memoizes values and functions that don’t depend on changed data.
-- Skips component re-renders when input values remain stable.
-- All transformations happen at **build time**, not at runtime.
+- **ESLint Integration**: Provides an ESLint plugin to surface potential issues and guide optimizations directly in your editor.
+
+- **Graceful Degradation**: If it encounters code that violates React's rules, it safely skips optimization for that part, continuing with the rest. 
 
 ---
 
-## ✅ Benefits
+## Installation
 
-| Without Compiler                     | With React Compiler             |
-|-------------------------------------|---------------------------------|
-| Manual use of `useCallback`, `useMemo` | Eliminated in most cases         |
-| Tedious dependency arrays           | No longer needed                |
-| Prone to stale closures & bugs      | Handled automatically           |
-| Verbose & error-prone code          | Clean, readable code            |
-| Dev responsible for optimization    | Compiler does the heavy lifting |
+To install the compiler and its ESLint plugin:
 
----
+```npm install -D babel-plugin-react-compiler@beta eslint-plugin-react-compiler@beta```
 
-## 📌 Key Takeaways
 
-- Lets you **write simple React**, while still getting **performance like hand-tuned apps**.
-- React behaves more like “reactive programming” — but fully within the React paradigm.
-- Still experimental, but expected to become **core to React's future performance story**.
-
-## Example
-
----
-
-**🚫 React 18 (Manual Optimization)**
+**🚫 Manual Optimization without React Compiler**
 
 ```tsx
-// App.tsx (React 18-style)
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-function Counter({ onIncrement }: { onIncrement: () => void }) {
-  const handleClick = useCallback(() => {
-    onIncrement();
-  }, [onIncrement]);
-
-  console.log('Counter rendered');
-  return <button onClick={handleClick}>Increment</button>;
-}
+const ExpensiveChild = React.memo(({ value }: { value: number }) => {
+  console.log("Child rendered");
+  return <div>Value: {value}</div>;
+});
 
 export default function App() {
   const [count, setCount] = useState(0);
-  const [name, setName] = useState('');
+  const [other, setOther] = useState(0);
 
-  const increment = useCallback(() => {
-    setCount((c) => c + 1);
-  }, []);
+  const handleClick = useCallback(() => setCount((c) => c + 1), []);
 
   return (
     <div>
-      <h1>Count: {count}</h1>
-      <Counter onIncrement={increment} />
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Type your name"
-      />
+      <button onClick={handleClick}>Increment Count</button>
+      <button onClick={() => setOther((o) => o + 1)}>Change Other</button>
+      <ExpensiveChild value={count} />
     </div>
   );
 }
 ```
 
-**✅ React 19 with Compiler (No Manual Memoization)**
+**✅ Auto Optimization with React Compiler**
 
-```
-// App.tsx (React 19 with Compiler)
+```tsx
 import { useState } from 'react';
 
 function Counter({ onIncrement }: { onIncrement: () => void }) {
