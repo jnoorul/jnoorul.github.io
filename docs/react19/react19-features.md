@@ -8,11 +8,11 @@ sidebar_position: 1
 
 ## ```use``` API and new hooks
 
+- **new API ```use```**
 - **Use of Async functions in useTransition**
 - **useActionState**
 - **useFormStatus**
 - **useOptimistic**
-- **new API ```use```**
 
 ## Improvements in React 19
 
