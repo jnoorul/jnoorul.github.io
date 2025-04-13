@@ -4,47 +4,31 @@ sidebar_position: 1
 
 # New Features & Improvements
 
----
 
-## Performance & Compiler
 
-- **React Compiler (React Forget)**
-- **Built-in Optimizations**
+## ```use``` API and new hooks
 
----
+- **Use of Async functions in useTransition**
+- **useActionState**
+- **useFormStatus**
+- **useOptimistic**
+- **new API ```use```**
 
-## Server & Async Rendering
+## Improvements in React 19
 
-- **React Server Components (RSC)**
-- **Streaming Enhancements**
-- **`use` Hook**
+- ```ref``` as a prop
+- ```<Context>``` as a provider 
+- Cleanup functions for refs 
+- useDeferredValue initial value
 
----
+## React Compiler
+## React Server Components
+## Web Components Support
 
-## New Hooks & APIs
+## Others
+- Support for Document Metadata
+- Support for stylesheets
+- Support for async scripts 
+- Support for preloading resources
 
-- **`useFormStatus` Hook**
-- **`useOptimistic` Hook**
 
----
-
-## Forms & Actions
-
-- **Declarative Forms API**
-
----
-
-## Web Integration
-
-- **Improved Web Components Support**
-- **Document Metadata API**
-
----
-
-## Developer Experience
-
-- **Stabilized Concurrent Features**
-- **Enhanced Error Handling**
-- **Updated React DevTools**
-
----
