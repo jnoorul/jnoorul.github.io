@@ -4,25 +4,23 @@ sidebar_position: 4
 
 # useActionState
 
-```useActionState``` is a Hook that allows you to update state based on the result of a action
+`useActionState` is a Hook that allows you to update state based on the result of a action
 
 ## 🚀 Key Points
 
 useActionState returns an array with the following values:
 
 - The current state
-- A new action that you can pass as the action prop to your form component or formAction prop to any button component within the form. 
+- A new action that you can pass as the action prop to your form component or formAction prop to any button component within the form.
 - The isPending flag that tells you whether there is a pending Transition.
 
-
-
-## ✅ Usage Example 
+## ✅ Usage Example
 
 ```tsx
 import { useActionState, useState } from "react";
 import { addToCart } from "./actions.js";
 
-function AddToCartForm({itemID, itemTitle}) {
+function AddToCartForm({ itemID, itemTitle }) {
   const [message, formAction, isPending] = useActionState(addToCart, null);
   return (
     <form action={formAction}>
@@ -40,7 +38,7 @@ export default function App() {
       <AddToCartForm itemID="1" itemTitle="JavaScript: The Definitive Guide" />
       <AddToCartForm itemID="2" itemTitle="JavaScript: The Good Parts" />
     </>
-  )
+  );
 }
 ```
 
@@ -50,12 +48,12 @@ export default function App() {
 "use server";
 
 export async function addToCart(prevState, queryData) {
-  const itemID = queryData.get('itemID');
+  const itemID = queryData.get("itemID");
   if (itemID === "1") {
     return "Added to cart";
   } else {
     // Add a fake delay to make waiting noticeable.
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       setTimeout(resolve, 2000);
     });
     return "Couldn't add to cart: the item is sold out.";
@@ -63,10 +61,6 @@ export async function addToCart(prevState, queryData) {
 }
 ```
 
+## Demo
 
-
-
-
-
-
-
+https://react.dev/reference/react/useActionState#display-information-after-submitting-a-form

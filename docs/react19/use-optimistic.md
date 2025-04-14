@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # useOptimistic
 
-```useOptimistic```  is a React Hook that lets you optimistically update the UI.
+`useOptimistic` is a React Hook that lets you optimistically update the UI.
 
 ## What is Optimistic Update
 
@@ -15,14 +15,14 @@ Optimistic UI updates are a technique where the UI reflects the expected result 
 ### Input Params
 
 - state: the value to be returned initially and whenever no action is pending.
-- updateFn(currentState, optimisticValue): a function that takes the current state and the optimistic value passed to addOptimistic and returns the resulting optimistic state. 
+- updateFn(currentState, optimisticValue): a function that takes the current state and the optimistic value passed to addOptimistic and returns the resulting optimistic state.
 
 ### Output Params
-- optimisticState: The resulting optimistic state. 
-- addOptimistic: addOptimistic is the dispatching function to call when you have an optimistic update. 
 
+- optimisticState: The resulting optimistic state.
+- addOptimistic: addOptimistic is the dispatching function to call when you have an optimistic update.
 
-## ✅ Usage Example 
+## ✅ Usage Example
 
 ```tsx
 import { useOptimistic, useState, useRef } from "react";
@@ -41,8 +41,8 @@ function Thread({ messages, sendMessage }) {
       ...state,
       {
         text: newMessage,
-        sending: true
-      }
+        sending: true,
+      },
     ]
   );
 
@@ -64,7 +64,7 @@ function Thread({ messages, sendMessage }) {
 
 export default function App() {
   const [messages, setMessages] = useState([
-    { text: "Hello there!", sending: false, key: 1 }
+    { text: "Hello there!", sending: false, key: 1 },
   ]);
   async function sendMessage(formData) {
     const sentMessage = await deliverMessage(formData.get("message"));
@@ -74,12 +74,6 @@ export default function App() {
 }
 ```
 
+## Demo
 
-
-
-
-
-
-
-
-
+https://react.dev/reference/react/useOptimistic#optimistically-updating-with-forms
